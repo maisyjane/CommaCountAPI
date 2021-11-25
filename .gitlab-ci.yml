@@ -1,19 +1,8 @@
-image: openjdk:16
+image: maven:3.6.3-jdk-11
 stages:
-  - build
   - test
-
-maven-build:
-  image: maven:3-jdk-8
-  stage: build
-  script:
-    - mvn clean
-    - mvn compile
-  artifacts:
-    paths:
-      - target/comma_counter_-0.0.1-SNAPSHOT.jar
 
 test:
   stage: test
   script:
-    - mvn clean test
+    - mvn test
