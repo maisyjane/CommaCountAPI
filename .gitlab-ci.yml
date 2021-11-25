@@ -1,7 +1,7 @@
 image: openjdk:16
 stages:
-  -build
-  -test
+  - build
+  - test
 
 maven-build:
   image: maven:3-jdk-16
