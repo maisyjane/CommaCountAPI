@@ -5,4 +5,4 @@ stages:
 test:
   stage: test
   script:
-    - mvn test
+    - mvn clean test
