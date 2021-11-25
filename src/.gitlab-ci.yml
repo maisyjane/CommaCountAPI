@@ -1,0 +1,17 @@
+image: openjdk:16
+stages:
+  -build
+  -test
+
+maven-build:
+  image: maven:3-jdk-16
+  stage: build
+  script: "mvn package -B"
+  artifacts:
+    paths:
+      - target/comma_counter_-0.0.1-SNAPSHOT.jar
+
+test:
+  stage: test
+  script:
+    - mvn clean test

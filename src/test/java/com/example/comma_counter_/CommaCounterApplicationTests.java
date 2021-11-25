@@ -7,7 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 class CommaCounterApplicationTests {
 
     @Test
-    void contextLoads() {
+    void commaCounter() {
+        String text = "My grocery list: ham, cheese, fairy liquid, pizza and yogurt.";
+        assert(comma_count.count_commas(text).equals("3"));
     }
 
 }
