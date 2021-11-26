@@ -21,6 +21,10 @@ public class CommaCounterApplication {
     @ResponseBody
     public ResponseEntity<String> commaCount(@RequestParam(value = "x", defaultValue = "No Text Entered") String text) {
         String numOfCommas;
+        //see spring JSON for explanation in chrome bookmarks
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.setAccessControlAllowOrigin("*");
+
         if(text.equals("No Text Entered"))
         {
             numOfCommas = "N/A";
@@ -29,14 +33,12 @@ public class CommaCounterApplication {
         {
             numOfCommas = comma_count.count_commas(text);
         }
-        //see spring JSON for explanation in chrome bookmarks
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        httpHeaders.setAccessControlAllowOrigin("*");
-        return new ResponseEntity<String> ("{\"String\": '" + text + "' | Commas: " + numOfCommas + " | Headers: " +  httpHeaders + " | Status:  }", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<String> ("{\"String\": '" + text + "' | Commas: " + numOfCommas + " | Headers: " +  httpHeaders + " | Status: " + String.valueOf(HttpStatus.OK.value()) + " }", HttpStatus.OK);
+
 
     }
 
-    @GetMapping(value = "/error")
+    @GetMapping(value = "/error") //produce json?
     public String error() {
         return "{\"String\": 'Invalid String' | Commas: N/A | Headers: " +  httpHeaders + " | Status: " + String.valueOf(HttpStatus.NOT_FOUND.value()) + "}";
     }
