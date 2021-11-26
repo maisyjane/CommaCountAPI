@@ -15,28 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @SpringBootTest
-@AutoConfigureMockMvc
 class CommaCounterApplicationTests {
-
-    @Autowired
-    private MockMvc mvc;
 
     @Test
     void commaCounter() {
         String text = "My grocery list: ham, cheese, fairy liquid, pizza and yogurt.";
         assert(comma_count.count_commas(text).equals("3"));
     }
-    @Test
-    public void givenReturnTypeIsResponseEntity_thenDefaultContentTypeIsJSON()  throws Exception {
 
-        // Given
-        String expectedMimeType = "application/json";
-
-        // Then
-        String actualMimeType = mvc.perform(MockMvcRequestBuilders.get("/", 1))
-                .andReturn().getResponse().getContentType();
-
-        assertEquals(expectedMimeType, actualMimeType); //was Assert.assertEquals check maven import
-    }
 
 }
