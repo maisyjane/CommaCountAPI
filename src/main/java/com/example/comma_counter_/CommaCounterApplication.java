@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class CommaCounterApplication {
 
+    final HttpHeaders httpHeaders = new HttpHeaders();
+
     public static void main(String[] args) {SpringApplication.run(CommaCounterApplication.class, args);}
 
     @GetMapping(value = "/", produces = "application/json")
@@ -28,15 +30,15 @@ public class CommaCounterApplication {
             numOfCommas = comma_count.count_commas(text);
         }
         //see spring JSON for explanation in chrome bookmarks
-        final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        return new ResponseEntity<String> ("{\"String\": '" + text + "' | Commas: " + numOfCommas + " | Headers: " +  httpHeaders + " | Status: " + String.valueOf(HttpStatus.OK.value()) + "}", httpHeaders, HttpStatus.OK);
+        httpHeaders.setAccessControlAllowOrigin("*");
+        return new ResponseEntity<String> ("{\"String\": '" + text + "' | Commas: " + numOfCommas + " | Headers: " +  httpHeaders + " | Status:  }", HttpStatus.NOT_FOUND);
 
     }
 
-    @GetMapping("/error")
+    @GetMapping(value = "/error")
     public String error() {
-        return String.format("Please Enter a valid string");
+        return "{\"String\": 'Invalid String' | Commas: N/A | Headers: " +  httpHeaders + " | Status: " + String.valueOf(HttpStatus.NOT_FOUND.value()) + "}";
     }
 
 
