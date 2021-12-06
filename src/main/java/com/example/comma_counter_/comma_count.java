@@ -4,16 +4,24 @@ public class comma_count {
 
     public static String count_commas(String text)
     {
-        int counter = 0;
-        for(int i =0; i<text.length(); i++)
+        if(text!="")
         {
-            char c = text.charAt(i);
-            if(c == ',')
+            int counter = 0;
+            for(int i =0; i<text.length(); i++)
             {
-                counter++;
-            }
+                char c = text.charAt(i);
+                if(c == ',')
+                {
+                    counter++;
+                }
 
+            }
+            return String.valueOf(counter);
         }
-        return String.valueOf(counter);
+        else
+        {
+            return "Please enter a valid string";
+        }
+
     }
 }
