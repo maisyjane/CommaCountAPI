@@ -2,7 +2,8 @@ package com.example.comma_counter_;
 
 public class comma_count {
 
-    public static String count_commas(String text)
+    public comma_count(){}
+    public String count_commas(String text)
     {
         if(text!="")
         {

@@ -24,21 +24,22 @@ class CommaCounterApplicationTests {
 
     @Autowired
     private MockMvc mvc;
+    comma_count c = new comma_count();
 
     @Test
     void commaCounterValidParameter() {
         String text = "My grocery list: ham, cheese, fairy liquid, pizza and yogurt.";
-        assert(comma_count.count_commas(text).equals("3"));
+        assert(c.count_commas(text).equals("3"));
     }
     @Test
     void commaCounterEmptyString() {
         String text = "";
-        assert(comma_count.count_commas(text).equals("Please enter a valid string"));
+        assert(c.count_commas(text).equals("Please enter a valid string"));
     }
     @Test
     void commaCounterValidStringNoCommas() {
         String text = "There are no commas here";
-        assert(comma_count.count_commas(text).equals("0"));
+        assert(c.count_commas(text).equals("0"));
     }
     @Test
     public void givenReturnTypeIsResponseEntity_thenDefaultContentTypeIsJSON()  throws Exception {
@@ -68,7 +69,7 @@ class CommaCounterApplicationTests {
         mvc.perform(MockMvcRequestBuilders
                 .get("/", 1)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
         //.andExpect(MockMvcResultMatchers.jsonPath("$.Commas").value(0));
 
     }
@@ -78,7 +79,7 @@ class CommaCounterApplicationTests {
         mvc.perform(MockMvcRequestBuilders
                         .get("/wrongroute", 1)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+                        .andExpect(status().isNotFound());
         //.andExpect(MockMvcResultMatchers.jsonPath("$.Commas").value(0));
 
     }
@@ -88,7 +89,7 @@ class CommaCounterApplicationTests {
         mvc.perform(MockMvcRequestBuilders
                         .get("/?x=", 1)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
         //.andExpect(MockMvcResultMatchers.jsonPath("$.Commas").value(0));
 
     }
