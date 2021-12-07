@@ -27,7 +27,7 @@ public class CommaCounterApplication {
         {
             numOfCommas = "0";
             json.put("Text", text);
-            json.put("Commas", numOfCommas);
+            json.put("answer", numOfCommas);
             json.put("Error", true);
             return ResponseEntity.badRequest()
                     .header("Content-Type", "application/json")
@@ -40,7 +40,7 @@ public class CommaCounterApplication {
         {
             numOfCommas = count.count_commas(text);
             json.put("Text", text);
-            json.put("Commas", numOfCommas);
+            json.put("answer", numOfCommas);
             json.put("Error", false);
             return ResponseEntity.ok()
                     .header("Content-Type", "application/json")
