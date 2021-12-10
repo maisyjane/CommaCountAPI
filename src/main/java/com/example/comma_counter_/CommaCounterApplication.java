@@ -26,9 +26,11 @@ public class CommaCounterApplication {
         if(text.equals("No Text Entered"))
         {
             numOfCommas = "0";
-            json.put("Text", text);
+            json.put("text", text);
             json.put("answer", numOfCommas);
-            json.put("Error", true);
+            json.put("error", true);
+
+
             return ResponseEntity.badRequest()
                     .header("Content-Type", "application/json")
                     .header("Access-Control-Allow-Origin", "*")
@@ -39,9 +41,9 @@ public class CommaCounterApplication {
         else
         {
             numOfCommas = count.count_commas(text);
-            json.put("Text", text);
+            json.put("text", text);
             json.put("answer", numOfCommas);
-            json.put("Error", false);
+            json.put("error", false);
             return ResponseEntity.ok()
                     .header("Content-Type", "application/json")
                     .header("Access-Control-Allow-Origin", "*")

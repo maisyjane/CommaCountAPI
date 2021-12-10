@@ -17,9 +17,9 @@ public class CommaErrorController implements ErrorController {
 
         JSONObject json = new JSONObject();
         //do something like logging - could do html here
-        json.put("Text", "Invalid Text");
+        json.put("text", "Invalid Text");
         json.put("answer", "0");
-        json.put("Error", true);
+        json.put("error", true);
 
         return ResponseEntity.badRequest()
                 .header("Content-Type", "application/json")
