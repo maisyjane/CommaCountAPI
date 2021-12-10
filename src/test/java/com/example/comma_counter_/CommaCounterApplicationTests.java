@@ -74,6 +74,26 @@ class CommaCounterApplicationTests {
 
     }
     @Test
+    public void TestStatusCodeAndResponseNumbers()  throws Exception {
+
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/?x=12345", 1)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+        //.andExpect(MockMvcResultMatchers.jsonPath("$.Commas").value(0));
+
+    }
+    @Test
+    public void TestStatusCodeAndResponseNumbersAndSpaces()  throws Exception {
+
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/?x=12345 12345", 1)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+        //.andExpect(MockMvcResultMatchers.jsonPath("$.Commas").value(0));
+
+    }
+    @Test
     public void TestStatusCodeAndResponseWithIncorrectRoute()  throws Exception {
 
         mvc.perform(MockMvcRequestBuilders

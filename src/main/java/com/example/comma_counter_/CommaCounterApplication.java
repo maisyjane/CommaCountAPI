@@ -21,6 +21,13 @@ public class CommaCounterApplication {
     public ResponseEntity<String> commaCount(@RequestParam(value = "x", defaultValue = "No Text Entered") String text) throws JSONException {
         comma_count count = new comma_count();
         String numOfCommas;
+        int counter =0;
+        for (int i = 0; i < text.length(); i++) {
+            // checks whether the character is not a digit and not a space
+            if (Character.isDigit(text.charAt(i)) || (text.charAt(i) == ' ')) {
+                counter++;
+            }
+        }
 
 
         if(text.equals("No Text Entered"))
@@ -37,6 +44,19 @@ public class CommaCounterApplication {
                     .body(json.toString());
 
 
+        }
+        else if(counter == text.length())
+        {
+            numOfCommas = "0";
+            json.put("text", "Please enter words, not numbers");
+            json.put("answer", numOfCommas);
+            json.put("error", true);
+
+
+            return ResponseEntity.badRequest()
+                    .header("Content-Type", "application/json")
+                    .header("Access-Control-Allow-Origin", "*")
+                    .body(json.toString());
         }
         else
         {
