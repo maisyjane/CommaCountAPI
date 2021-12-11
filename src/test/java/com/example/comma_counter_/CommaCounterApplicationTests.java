@@ -60,7 +60,8 @@ class CommaCounterApplicationTests {
                 .get("/?x=test", 1)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("0"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("0"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("false"));
 
     }
     @Test
@@ -70,7 +71,8 @@ class CommaCounterApplicationTests {
                 .get("/", 1)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("0"));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("0"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("true"));
 
     }
     @Test
@@ -80,7 +82,9 @@ class CommaCounterApplicationTests {
                         .get("/?x=12345", 1)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("0"));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("0"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.text").value("Please enter words, not numbers"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("true"));
 
     }
     @Test
@@ -90,7 +94,9 @@ class CommaCounterApplicationTests {
                         .get("/?x=12345 12345", 1)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("0"));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("0"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.text").value("Please enter words, not numbers"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("true"));
 
     }
     @Test
@@ -109,7 +115,8 @@ class CommaCounterApplicationTests {
                         .get("/?x=", 1)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("0"));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("0"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("true"));
 
     }
     @Test
@@ -119,7 +126,8 @@ class CommaCounterApplicationTests {
                         .get("/?x=,,,", 1)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("3"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("3"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("false"));
 
     }
     @Test
@@ -129,7 +137,8 @@ class CommaCounterApplicationTests {
                         .get("/?x=no commas", 1)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("0"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.answer").value("0"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("false"));
 
     }
 
